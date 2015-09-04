@@ -1,11 +1,11 @@
-extends markets
+extends menu
 
 block market_view
   .row
     .col-md-12  
       .panel.panel-default
         .panel-heading
-          strong Bittrex - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
+          strong #{settings.locale.bleutrade} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
           a(href='#')
             span.fa.fa-line-chart.pull-right.view-chart-disabled.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title='#{settings.locale.mkt_no_chart}') 
         table.table.table-bordered.summary-table 
@@ -21,39 +21,20 @@ block market_view
               th #{settings.locale.mkt_change}
           tbody
             tr
-              td #{marketdata.bittrex.summary.High.toFixed(8)}
-              td #{marketdata.bittrex.summary.Low.toFixed(8)}
-              td #{marketdata.bittrex.summary.Volume.toFixed(8)}
-              td.hidden-xs #{marketdata.bittrex.summary.Bid.toFixed(8)}
-              td.hidden-xs #{marketdata.bittrex.summary.Ask.toFixed(8)}
-              td.hidden-xs #{marketdata.bittrex.summary.PrevDay.toFixed(8)}
-              td.hidden-xs #{marketdata.bittrex.summary.Last.toFixed(8)}
-              - var bittrex_change = (100 - ((parseFloat(marketdata.bittrex.summary.PrevDay)/parseFloat(marketdata.bittrex.summary.Last))*100)).toFixed(2);
-              if bittrex_change >= 0
-                td.success +#{bittrex_change} %
+              td #{parseFloat(marketdata.data.summary.High).toFixed(8)}
+              td #{parseFloat(marketdata.data.summary.Low).toFixed(8)}
+              td #{parseFloat(marketdata.data.summary.Volume).toFixed(8)}
+              td.hidden-xs #{parseFloat(marketdata.data.summary.Bid).toFixed(8)}
+              td.hidden-xs #{parseFloat(marketdata.data.summary.Ask).toFixed(8)}
+              td.hidden-xs #{parseFloat(marketdata.data.summary.PrevDay).toFixed(8)}
+              td.hidden-xs #{parseFloat(marketdata.data.summary.Last).toFixed(8)}
+              - var bleutrade_change = (100 - ((parseFloat(marketdata.data.summary.PrevDay)/parseFloat(marketdata.data.summary.Last))*100)).toFixed(2);
+              if bleutrade_change >= 0
+                td.success +#{bleutrade_change} %
               else
-                td.danger #{bittrex_change} %
+                td.danger #{bleutrade_change} %
   .row
-    .col-md-6
-      .panel.panel-default
-        .panel-heading
-          h3.panel-title #{settings.locale.mkt_sell_orders}
-        table.table.table-striped.table-bordered.order-table
-          thead
-            tr
-              th #{settings.locale.mkt_price} (#{marketdata.exchange})
-              th #{settings.locale.mkt_amount} (#{marketdata.coin})
-              th.hidden-xs #{settings.locale.mkt_total} (#{marketdata.exchange})
-          tbody
-            each sell in marketdata.bittrex.sells
-              tr
-                td
-                  =sell.price.toFixed(8)
-                td
-                  =sell.amount.toFixed(8)
-                td.hidden-xs
-                  =sell.total
-    .col-md-6
+    .col-md-6.col-xs-12
       .panel.panel-default
         .panel-heading
           h3.panel-title #{settings.locale.mkt_buy_orders}
@@ -64,14 +45,33 @@ block market_view
               th #{settings.locale.mkt_amount} (#{marketdata.coin})
               th.hidden-xs #{settings.locale.mkt_total} (#{marketdata.exchange})
           tbody
-            each buy in marketdata.bittrex.buys
+            each buy in marketdata.data.buys
               tr
                 td
-                  =buy.price.toFixed(8)
+                  =parseFloat(buy.price).toFixed(8)
                 td
-                  =buy.amount.toFixed(8)
+                  =parseFloat(buy.amount).toFixed(8)
                 td.hidden-xs
-                  =buy.total
+                  =parseFloat(buy.total).toFixed(8)
+    .col-md-6.col-xs-12
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title #{settings.locale.mkt_sell_orders}
+        table.table.table-striped.table-bordered.order-table
+          thead
+            tr
+              th #{settings.locale.mkt_price} (#{marketdata.exchange})
+              th #{settings.locale.mkt_amount} (#{marketdata.coin})
+              th.hidden-xs #{settings.locale.mkt_total} (#{marketdata.exchange})
+          tbody
+            each sell in marketdata.data.sells
+              tr
+                td
+                  =parseFloat(sell.price).toFixed(8)
+                td
+                  =parseFloat(sell.amount).toFixed(8)
+                td.hidden-xs
+                  =parseFloat(sell.total).toFixed(8)
   .row   
     .col-md-12
       .panel.panel-default
@@ -86,17 +86,17 @@ block market_view
               th #{settings.locale.mkt_total} (#{marketdata.exchange})
               th.hidden-xs #{settings.locale.mkt_time_stamp}
           tbody
-            each order in marketdata.bittrex.history
-              if order.OrderType == 'BUY'
+            each order in marketdata.data.history
+              if order.OrderType == "BUY"
                 tr.success
                   td.hidden-xs
                     =order.OrderType
                   td
-                    =order.Quantity.toFixed(8)
+                    =order.Quantity
                   td
-                    =order.Price.toFixed(8)
+                    =order.Price
                   td
-                    =order.Total.toFixed(8)
+                    =order.Total
                   td.hidden-xs
                     =order.TimeStamp
               else
@@ -104,11 +104,11 @@ block market_view
                   td.hidden-xs
                     =order.OrderType
                   td
-                    =order.Quantity.toFixed(8)
+                    =order.Quantity
                   td
-                    =order.Price.toFixed(8)
+                    =order.Price
                   td
-                    =order.Total.toFixed(8)
+                    =order.Total
                   td.hidden-xs
                     =order.TimeStamp
       .footer-padding

@@ -1,5 +1,5 @@
 body {
-  padding: 60px;
+  padding: 80px 40px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
  /* background-image: url('/images/background2.png');*/
 }
@@ -101,9 +101,12 @@ tr {
 }
 .connections {
 	position: absolute;
-	bottom: 5px;
+	bottom: 15px;
 	right: 15px;
+}
 
+#lblBlockcount {
+	margin-right: 10px;
 }
 
 #twitter-icon img{
@@ -138,7 +141,7 @@ tr {
 	}
 }
 
-@media(max-width:965px){
+@media(max-width:1096px){
 	.nav-search input {
 	    width: 300px !important;
     }
@@ -146,7 +149,7 @@ tr {
 
 @media(max-width:865px){
 	.nav-search input {
-	    width: 200px !important;
+	    width: 150px !important;
     }
 }
 .qrcode {
@@ -160,3 +163,4 @@ tr {
 	position: absolute;
 	bottom: 0px;
 }
+

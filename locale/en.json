@@ -18,7 +18,7 @@
     "ex_search_message": "You may enter a block height, block hash, tx hash or address.",
     "ex_error": "Error!",
     "ex_search_error": "Search found no results for: ",
-    "ex_latest_transactions": "Lastest Transactions",
+    "ex_latest_transactions": "Latest Transactions",
     "ex_summary": "Block Summary",
     "ex_supply": "Coin Supply",
     "ex_block": "Block",
@@ -102,7 +102,7 @@
     "mkt_volume": "Volume",
     "mkt_top_bid": "Top Bid",
     "mkt_top_ask": "Top Ask",
-    "mkt_last": "Last",
+    "mkt_last": "Last Price",
     "mkt_yesterday": "Yesterday",
     "mkt_change": "Change",
     "mkt_sell_orders": "Sell Orders",
@@ -113,6 +113,14 @@
     "mkt_trade_history": "Trade History",
     "mkt_type": "Type",
     "mkt_time_stamp": "Time Stamp",
+
+    // Markets
+    "poloniex": "Poloniex",
+    "bittrex": "Bittrex",
+    "bleutrade": "Bleutrade",
+    "yobit": "Yobit",
+    "empoex": "Empoex",
+    "cryptsy": "Cryptsy",
 
     // Heavy rewards view
     "heavy_title": "Reward/voting information",

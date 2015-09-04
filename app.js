@@ -31,7 +31,7 @@ if (settings.heavy != true) {
     getsupply - Returns the current money supply.
     getmaxmoney - Returns the maximum possible money supply.
   */
-  bitcoinapi.setAccess('only', ['getinfo', 'getnetworkhashps', 'getdifficulty', 'getconnectioncount', 
+  bitcoinapi.setAccess('only', ['getinfo', 'getstakinginfo', 'getnetworkhashps', 'getdifficulty', 'getconnectioncount', 
     'getblockcount', 'getblockhash', 'getblock', 'getrawtransaction','getmaxmoney', 'getvote',
     'getmaxvote', 'getphase', 'getreward', 'getnextrewardestimate', 'getnextrewardwhenstr',
     'getnextrewardwhensec', 'getsupply']);
@@ -95,7 +95,7 @@ app.use('/ext/getdistribution', function(req,res){
 
 app.use('/ext/getlasttxs/:count/:min', function(req,res){
   db.get_last_txs(req.param('count'), (req.param('min') * 100000000), function(txs){
-    res.send(txs);
+    res.send({data: txs});
   });
 });
 
@@ -112,6 +112,7 @@ app.set('index', settings.index);
 app.set('heavy', settings.heavy);
 app.set('txcount', settings.txcount);
 app.set('nethash', settings.nethash);
+app.set('nethash_units', settings.nethash_units);
 app.set('show_sent_received', settings.show_sent_received);
 app.set('logo', settings.logo);
 app.set('theme', settings.theme);
